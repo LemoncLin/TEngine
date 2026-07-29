@@ -27,18 +27,25 @@ public partial class GameApp
         GameEventHelper.Init();
         _hotfixAssembly = (List<Assembly>)objects[0];
         Log.Warning("======= 看到此条日志代表你成功运行了热更新代码 =======");
-        Log.Warning("======= Entrance GameApp =======");
+        Log.Warning("======= Entrance GameApp  V2 热更测试成功 =======");
         Utility.Unity.AddDestroyListener(Release);
         Log.Warning("======= StartGameLogic =======");
         StartGameLogic();
     }
-    
+
     private static void StartGameLogic()
     {
-        // GameEvent.Get<ILoginUI>().ShowLoginUI();
-        GameModule.UI.ShowUIAsync<BattleMainUI>();
+        // 注册热更域流程 — 替换主包流程，启动 VR 售楼宝
+        GameModule.Procedure.RestartProcedure(
+            new ProcedureSplash(),
+            new ProcedureMainMenu(),
+            new ProcedurePanorama(),
+            new ProcedureProjectNavigation(),
+            new ProcedureUnitBrowsing(),
+            new ProcedureSurrounding()
+        );
     }
-    
+
     private static void Release()
     {
         SingletonSystem.Release();

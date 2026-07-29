@@ -40,3 +40,23 @@ server --no-openbrowser  # 关闭自动打开浏览器
 - [x] 引入handlerbars编译模板
 - [x] 支持文件是否跨域
 - [x] 支持https服务
+
+---
+
+## 🚀 快速启动
+
+**全局安装后使用：**（按文档说明安装 `yumu-static-server` 后）
+
+```bash
+server           # 默认端口 8080
+server -p 3000   # 指定端口 3000
+server -p 8080 -cors # 端口+开启跨域
+```
+
+**本地运行开发时：**（未全局安装，直接运行项目）
+
+```bash
+npm install      # 安装依赖
+npm start        # 默认启动端口 8080
+npx bin/app.js -p 3000 -cors # 指定端口并开启跨域
+```
