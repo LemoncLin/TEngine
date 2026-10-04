@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:UnityProject/Assets/AssetRaw/UI/Prefabs/VRRealEstate.meta
 guid: adba1ae61350f4b4691e08c7e0c95637
+========
+guid: 113bc2bcfe487eb469aa654e6718f78b
+>>>>>>>> origin/main:UnityProject/Packages/com.unity.pipeline/Editor/Authoring.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

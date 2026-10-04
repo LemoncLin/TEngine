@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:UnityProject/Assets/TextMesh Pro.meta
 guid: f54d1bd14bd3ca042bd867b519fee8cc
+========
+guid: 6a4d02bf29da41d499ea151c638ee920
+>>>>>>>> origin/main:UnityProject/Packages/com.unity.pipeline/Editor/BuildProcessors.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

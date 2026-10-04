@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+<<<<<<<< HEAD:UnityProject/Assets/GameScripts/HotFix/GameLogic/IEvent/ISurroundingUI.cs.meta
+guid: 33dad826f9cbbe74293d660c69a1d64a
+========
+guid: 50df0b5c45692fb4a81122ca6eec4709
+>>>>>>>> origin/main:UnityProject/Packages/com.unity.pipeline/Editor/BuildProcessors/PipelineRuntimeBuildProcessor.cs.meta
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,6 +1,11 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:UnityProject/Assets/AssetRaw/DLL/System.Core.dll.bytes.meta
 guid: c959148f14d21b547aba53b8b8d11a93
 TextScriptImporter:
+========
+guid: a3ca9b2d97442e0499ea28b681f751d9
+AssemblyDefinitionImporter:
+>>>>>>>> origin/main:UnityProject/Packages/com.unity.pipeline/Editor/Unity.Pipeline.Editor.asmdef.meta
   externalObjects: {}
   userData: 
   assetBundleName: 

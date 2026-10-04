@@ -1,0 +1,12 @@
+fileFormatVersion: 2
+<<<<<<<< HEAD:UnityProject/Assets/AssetRaw/DLL/System.dll.bytes.meta
+guid: c935afdc58783b94482601b32257d608
+TextScriptImporter:
+========
+guid: 71e9815631ba2574b92564e93b8efc9c
+AssemblyDefinitionImporter:
+>>>>>>>> origin/main:UnityProject/Packages/com.unity.pipeline/Runtime/Unity.Pipeline.asmdef.meta
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

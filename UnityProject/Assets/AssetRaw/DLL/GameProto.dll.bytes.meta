@@ -1,6 +1,11 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:UnityProject/Assets/AssetRaw/DLL/GameProto.dll.bytes.meta
 guid: 27d0b5dda1a665d4cbaa71d218c319fa
 TextScriptImporter:
+========
+guid: 634480e645628f944b7b9ce8c0a3d70a
+PackageManifestImporter:
+>>>>>>>> origin/main:UnityProject/Packages/com.unity.pipeline/package.json.meta
   externalObjects: {}
   userData: 
   assetBundleName: 

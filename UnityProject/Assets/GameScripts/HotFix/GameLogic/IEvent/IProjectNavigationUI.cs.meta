@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:UnityProject/Assets/GameScripts/HotFix/GameLogic/IEvent/IProjectNavigationUI.cs.meta
 guid: d164a8416beff6044adc27a820b5c674
+========
+guid: 87863085291527c4581eb05fcc20b47c
+>>>>>>>> origin/main:UnityProject/Packages/com.unity.pipeline/Runtime/AssemblyInfo.cs.meta
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2

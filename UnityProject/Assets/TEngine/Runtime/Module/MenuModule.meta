@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:UnityProject/Assets/TEngine/Runtime/Module/MenuModule.meta
 guid: e8e006453d73d2a4587bb1c901459346
+========
+guid: 5144d7ecd5530424ab66f205802d8c9e
+>>>>>>>> origin/main:UnityProject/Packages/com.unity.pipeline/Editor.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+<<<<<<<< HEAD:UnityProject/Assets/GameScripts/HotFix/GameLogic/IEvent/IPanoramaUI.cs.meta
+guid: 96c4214be8bd5564aaaeff6b7ed8ff2c
+========
+guid: 462c39b6cec1060408ca75a32bf31d89
+>>>>>>>> origin/main:UnityProject/Packages/com.unity.pipeline/Editor/Authoring/ProjectPaths.cs.meta
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

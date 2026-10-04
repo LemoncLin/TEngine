@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:UnityProject/Assets/AssetRaw/UI/Fonts.meta
 guid: 1c6a9b95376dd0a46b4ff98620b3b643
+========
+guid: 8b1d193bfb6e52d44975ae298a3c060a
+>>>>>>>> origin/main:UnityProject/Packages/com.unity.pipeline/CodeGen.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

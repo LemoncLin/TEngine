@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:UnityProject/Assets/GameScripts/HotFix/GameLogic/IEvent/IMainMenuUI.cs.meta
 guid: 95aeb4e7a0e1b1d45b1dd129d2807a90
+========
+guid: 6ef72626627670a4eadfccdab20cd9ba
+>>>>>>>> origin/main:UnityProject/Packages/com.unity.pipeline/Editor/Authoring/AuthoringUndoScope.cs.meta
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
