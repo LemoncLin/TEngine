@@ -35,14 +35,10 @@ public partial class GameApp
 
     private static void StartGameLogic()
     {
-        // 注册热更域流程 — 替换主包流程，启动 VR 售楼宝
+        // 注册热更域流程 — 启动 VR 售楼宝（底部菜单栏 + 模块内容切换）
         GameModule.Procedure.RestartProcedure(
             new ProcedureSplash(),
-            new ProcedureMainMenu(),
-            new ProcedurePanorama(),
-            new ProcedureProjectNavigation(),
-            new ProcedureUnitBrowsing(),
-            new ProcedureSurrounding()
+            new ProcedureMainMenu()
         );
     }
 

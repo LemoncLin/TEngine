@@ -7,5 +7,8 @@ namespace GameLogic
     {
         void ShowMainMenu();
         void CloseMainMenu();
+        void OnTabSelected(int tabIndex);
+        void OnModuleLoading(int tabIndex);
+        void OnModuleLoaded(int tabIndex);
     }
 }

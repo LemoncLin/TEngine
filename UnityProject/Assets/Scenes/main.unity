@@ -287,6 +287,10 @@ PrefabInstance:
       propertyPath: frameRate
       value: 120
       objectReference: {fileID: 0}
+    - target: {fileID: 7696541955266276690, guid: e38c712e7904fdf42bd0458b769718dd, type: 3}
+      propertyPath: gameSpeed
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7696541955266276700, guid: e38c712e7904fdf42bd0458b769718dd, type: 3}
       propertyPath: m_RootOrder
       value: 1
