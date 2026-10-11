@@ -24,13 +24,25 @@ READ_ONLY = frozenset({
 })
 
 # Explicit catalog, not a prefix heuristic. Only implemented return/poll contracts are admitted.
+# dry_run: 命令是否支持 dry_run 预演（不支持时 preview 退化为静态目标声明）；
+# confirm: 执行时是否必须回传 confirm（审计把关由 workflow 审批承担时可为 False）。
 MUTATIONS = {
     "tengine_bake_ugui": {"dry_run": True, "confirm": True, "poll": None},
     "delete_asset": {"dry_run": True, "confirm": True, "poll": None},
     "set_player_settings": {"dry_run": True, "confirm": True, "poll": None},
     "set_build_settings": {"dry_run": True, "confirm": True, "poll": None},
     "build": {"dry_run": True, "confirm": True, "poll": "build_status"},
+    # Pipeline 内建命令，不接受 dry_run/confirm 参数：预览为静态目标声明，
+    # 执行由 make_plan/consume_approval 审批门禁把关，写入后必须用只读命令复核。
+    "set_serialized_field": {"dry_run": False, "confirm": False, "poll": None},
+    # menu 可执行任意 Editor 菜单项，属高危：仅在 MENU_ALLOWLIST 内放行。
+    "menu": {"dry_run": False, "confirm": False, "poll": None},
 }
+
+# menu 命令的最小授权路径。扩大此集合 = 扩大可自动执行的 Editor 菜单范围，须单独评审。
+MENU_ALLOWLIST = frozenset({
+    "File/Save Project",  # 把 Editor 内存中的脏资产（prefab 等）落盘
+})
 
 RESERVED = {"project-path", "project_path", "runtime", "runtime-path", "runtime_path",
             "format", "json", "confirm", "dry_run", "dry-run", "non-interactive", "timeout"}
@@ -48,6 +60,13 @@ def validate_parameters(parameters):
     for key in parameters:
         if not key or key.startswith("-") or key in RESERVED or not key.replace("_", "").isalnum():
             raise WorkflowError(f"Reserved or invalid parameter: {key}")
+    return parameters
+
+
+def validate_mutation(command, parameters):
+    """变更命令的参数级策略：preview 与 apply 共用，防止审批后替换目标。"""
+    if command == "menu" and parameters.get("path") not in MENU_ALLOWLIST:
+        blocked(f"Menu path is not in MENU_ALLOWLIST: {parameters.get('path')!r}")
     return parameters
 
 
@@ -285,29 +304,47 @@ class Unity:
         summary = validate_test_result(value, expected)
         return {"mode": mode, "filter": query, "summary": summary, "results": value["results"]}
 
+    def preview_payload(self, command, parameters, policy):
+        """构造预览：支持 dry_run 的命令回传 Editor 预演结果，否则为静态目标声明。
+
+        两种形态的输入都含 parameters，apply 阶段用同一入口重建比对，
+        保证审批后目标未被替换。
+        """
+        if policy["dry_run"]:
+            return self.call(command, {**parameters, "dry_run": True})
+        return {"staticOnly": True, "command": command, "parameters": parameters}
+
     def preview(self, command, parameters, inputs=()):
         validate_parameters(parameters)
         if command not in MUTATIONS:
             blocked(f"Mutation policy/return contract not implemented: {command}")
+        validate_mutation(command, parameters)
         self.ready()
         policy = MUTATIONS[command]
-        preview = self.call(command, {**parameters, "dry_run": True}) if policy["dry_run"] else {"staticOnly": True}
+        preview = self.preview_payload(command, parameters, policy)
         return make_plan(self.run, "unity", command, parameters, high_risk=True, inputs=inputs, preview=preview)
 
     def apply(self, plan, approval_file):
         if plan.get("kind") != "unity" or plan.get("command") not in MUTATIONS:
             blocked("Unsupported Unity mutation plan.")
         validate_parameters(plan["parameters"])
+        validate_mutation(plan["command"], plan["parameters"])
         self.ready()
         self.discover()
         command = plan["command"]
         if command not in self.capabilities:
             blocked(f"Missing capability: {command}")
-        current_preview = self.call(command, {**plan["parameters"], "dry_run": True})
+        policy = MUTATIONS[command]
+        current_preview = self.preview_payload(command, plan["parameters"], policy)
         if digest(current_preview) != digest(plan.get("preview")):
             blocked("Editor preview changed since authorization; inspect the new state and authorize a fresh preview.")
         consume_approval(self.run, plan, approval_file)
-        result = self.call(command, {**plan["parameters"], "confirm": True, "dry_run": False}, mutating=True)
+        extra = {}
+        if policy["dry_run"]:
+            extra["dry_run"] = False
+        if policy["confirm"]:
+            extra["confirm"] = True
+        result = self.call(command, {**plan["parameters"], **extra}, mutating=True)
         poll = MUTATIONS[command]["poll"]
         if poll:
             if not isinstance(result, dict) or result.get("status") != "queued":
