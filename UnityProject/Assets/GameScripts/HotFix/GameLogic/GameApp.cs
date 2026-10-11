@@ -35,10 +35,16 @@ public partial class GameApp
 
     private static void StartGameLogic()
     {
-        // 注册热更域流程 — 启动 VR 售楼宝（底部菜单栏 + 模块内容切换）
+        // 注册热更域流程 — VR 售楼宝：启动初始化 → 启动过渡 → 功能流程直切。
+        // RestartProcedure 会销毁主包启动链 FSM，并自动启动列表第一个流程（ProcedureLaunch）。
+        // 主菜单 MainMenuUI 由 ProcedureLaunch 打开后常驻，不随任何流程切换关闭。
         GameModule.Procedure.RestartProcedure(
+            new ProcedureLaunch(),
             new ProcedureSplash(),
-            new ProcedureMainMenu()
+            new ProcedurePanorama(),
+            new ProcedureProjectNavigation(),
+            new ProcedureUnitBrowsing(),
+            new ProcedureSurrounding()
         );
     }
 
