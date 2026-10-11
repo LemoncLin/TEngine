@@ -2,6 +2,32 @@
 
 使用中文交流、记录决策和交付结果。以当前源码、测试和实际工具结果为依据，不把旧文档当作 API 保证。
 
+## 运行环境（强制）
+
+本仓库的 **真实开发与验证环境在 Windows**，不是 WSL/Linux 原生工具链。
+
+| 组件 | 位置 | 说明 |
+|------|------|------|
+| Unity Editor | Windows | 版本以 `UnityProject/ProjectSettings/ProjectVersion.txt` 为准（当前常用 2022.3.x） |
+| Python | Windows | 用于 `UnityProject/.codex/scripts/workflow.py`；要求 3.11+ |
+| .NET SDK | Windows | 用于 `dotnet build` 解决方案 |
+| Git | Windows | 用于项目同步与版本管理 |
+| Unity CLI | Windows | `UnityProject/Tools/unity.exe`（不是 Editor 安装目录里的同名文件） |
+| OpenCode | 在 WSL 中运行 | **仅 IDE/代理进程在 WSL**；不得把 WSL 当成 Unity/dotnet/Python/Git 的默认执行环境 |
+
+### 代理必须遵守
+
+1. **不要**在 WSL 里查找或安装 `unity`、`dotnet`、`python3` 作为本项目的主工具链，**不要**假设存在 Linux 版 Unity Editor。
+2. 执行工作流、构建、CLI 时，优先使用 **Windows 路径与 Windows 可执行文件**。OpenCode 在 WSL 时：
+   - 项目路径使用 `/mnt/f/U3D/TEngine/...` 仅作「在 WSL 里读文件」；
+   - 跑命令应调用 Windows 侧，例如：
+     - `powershell.exe -NoProfile -Command "cd F:\\U3D\\TEngine\\UnityProject; python .codex\\scripts\\workflow.py doctor"`
+     - 或 `cmd.exe /c "..."`；
+   - 若客户端支持直接指定 Windows shell，优先 Windows shell，而不是 bash 里的 `python3`/`dotnet`。
+3. 文档与交付里的路径：**对人展示用 Windows 路径**（`F:\U3D\TEngine\...`）；仅在必须说明 WSL 访问方式时再写 `/mnt/f/...`。
+4. `doctor` / `check` / `verify` / `unity` / `luban` / `ui` **一律视为 Windows 项目命令**，在 `UnityProject` 目录下执行；失败时先怀疑「在 WSL 里误调了 Linux 工具」，而不是缺少 WSL 依赖。
+5. 不在本项目中引入「先配置 WSL 版 Unity / 在 WSL 装 dotnet 才能开发」的步骤。
+
 ## 工作方式
 
 1. 先读相关实现与 `git status`，保留已有修改；不得恢复用户删除的文件。

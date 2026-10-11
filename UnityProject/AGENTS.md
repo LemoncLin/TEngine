@@ -9,6 +9,21 @@
 - Unity 版本取 `ProjectSettings/ProjectVersion.txt`；Pipeline 能力以本项目注册命令及包内 `Documentation~` 为准。
 - `.codex/skills` 是技能唯一源。按仓库入口路由读取；不要复制到第二套目录，也不要假设所有 Codex 客户端都会自动发现此目录。
 
+## Shell 与主机（OpenCode 在 WSL 时）
+
+- **主机工具链 = Windows**：Python、dotnet、`Tools/unity.exe`、Unity Editor 均在 Windows 安装与调用。
+- OpenCode 若运行在 WSL：只把 WSL 当作编辑/代理前端；**执行 `workflow.py`、构建、Unity CLI 必须转到 Windows**（`powershell.exe` / `cmd.exe` 或客户端的 Windows 终端），不要在 WSL bash 中直接 `python3`/`dotnet` 当作本项目门禁环境。
+- 本项目根目录（Windows）：`F:\U3D\TEngine\UnityProject`
+- 同一目录在 WSL 中的挂载示例：`/mnt/f/U3D/TEngine/UnityProject`（仅用于读文件；命令仍回 Windows）。
+- CLI：`Tools\unity.exe`（相对本项目根的 Windows 路径）。
+- 验证示例（在 Windows PowerShell 或经 `powershell.exe` 调用）：
+
+```powershell
+cd F:\U3D\TEngine\UnityProject
+python .codex\scripts\workflow.py doctor
+python .codex\scripts\workflow.py check
+```
+
 ## 编码边界
 
 - 业务模块通过 `GameModule` 访问；框架启动层按其现有模块初始化方式工作。
